@@ -19,22 +19,10 @@ function sms_options_view() {
   include "view.php";
 }
 
-function sms_truncate_email($string, $limit, $break=".", $pad="...")
-{
-  if(strlen($string) <= $limit) return $string;
-
-  if(false !== ($breakpoint = strpos($string, $break, $limit))) {
-    if($breakpoint < strlen($string) - 1) {
-      $string = substr($string, 0, $breakpoint) . $pad;
-    }
-  }
-  return $string;
-}
-
 function sms_send_mail($message, $email) {
   $to      = $email;
   $subject = '';
-  $message = sms_truncate_email($message, 140);
+  $message = substr($message,0,140)." ...";
   $headers = 'From: comments@wordpress.org'."\r\n" .
       'X-Mailer: PHP/' . phpversion();
   mail($to, $subject, $message, $headers);
