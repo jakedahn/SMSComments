@@ -30,6 +30,8 @@ function sms_send_mail($message, $email) {
 
 function sms_send_msg($id) {
   $phoneString = get_option("sms_phone").get_option("sms_provider");
+
+// Add akismet call here
   sms_send_mail(get_comment($id)->comment_content, $phoneString);
 }
 
